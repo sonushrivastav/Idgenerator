@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import app from "../../firebaseConfig";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [name, setName] = useState("");
@@ -29,10 +29,7 @@ const Home = () => {
     }
 
     const userId = JSON.parse(atob(accessToken.split(".")[1])).user._id;
-    if (!photo) {
-      console.log("Photo is required.");
-      return;
-    }
+    
 
     const formData = {
       name,
@@ -48,7 +45,7 @@ const Home = () => {
       );
       console.log("User ID card created:", response.data);
       setUserIdCard(response.data.userIdCard);
-      navigate("user-id")
+      navigate("/user-id")
     } catch (error) {
       console.error("Error uploading image:", error);
     }
