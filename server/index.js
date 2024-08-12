@@ -9,7 +9,7 @@ const userRoutes = require("./routes/user.routes");
 const userIdCardRoutes = require("./routes/userIdCard.routes");
 
 mongoose
-  .connect(config.connectionString, {
+  .connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
