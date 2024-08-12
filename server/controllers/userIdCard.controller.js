@@ -35,14 +35,15 @@ exports.getUserIdCardByUserId = async (req, res) => {
     const { userId } = req.params;
     const userIdCard = await UserIdCard.findOne({ user: userId }).populate(
       "user",
-      "name email"
+      "name email",
+      
     );
 
     if (!userIdCard) {
       return res.status(404).json({ message: "User ID card not found" });
     }
 
-    res.status(200).send(userIdCard.photo);
+    res.status(200).send({name:userIdCard?.name,age:userIdCard?.age,photo:userIdCard.photo});
   } catch (error) {
     console.error("Error fetching User ID card:", error);
     res.status(500).json({ message: "Server error" });
